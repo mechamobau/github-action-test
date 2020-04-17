@@ -1,0 +1,25 @@
+name: unit-test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  run:
+    name: run unit test
+    runs-on: ubuntu-latest
+    steps:
+      - name: clones repository
+        uses: actions/checkout@v2
+      - name: fetch repository
+        run: git fetch origin
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - run: npm ci
+      - name: build the project
+      - run: npm run build
+      - name: run unit tests
+      - run: npm test
